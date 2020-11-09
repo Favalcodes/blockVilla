@@ -2,8 +2,9 @@
 pragma solidity ^0.6.0;
 
 import './ownable.sol';
+import './userRegistry.sol'
 
-contract propertyRegister is ownable  {    
+contract propertyRegister is userRegistry  {    
 
    struct Property{
        string name;
@@ -11,7 +12,7 @@ contract propertyRegister is ownable  {
        uint32 rentOrSale;
        uint132 price;
        uint256 propertyDeed;
-       boolean status
+       bool status
 
    }
 
