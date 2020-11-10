@@ -17,7 +17,7 @@ contract PropertySale is propertyRegister{
         _;
     }
 
-    function _buyProperty(uint propertyId ) payable external usersOnly onSale(propertyId) rightprice(propertyId) returns(address, string) {
+    function _buyProperty(uint propertyId ) payable external usersOnly onSale(propertyId) rightprice(propertyId) returns(address, string memory) {
         
         properties[propertyId].saleStatus = true;
         address old_owner = propertyToOwner[propertyId];

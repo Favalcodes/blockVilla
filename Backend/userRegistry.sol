@@ -20,7 +20,7 @@ contract registerUsers {
         string name;
         string work_address;
         string extra_detail;
-        uint256 password;
+        bytes32 password;
         uint256 photo;
         address wallet;
         bool status;
@@ -32,9 +32,9 @@ contract registerUsers {
 
     event newUser(uint id, string name, string work_address, string extra_detail);
 
-    function addUser(string memory _name, string memory _work_address, string memory _extra_detail,uint _passsword,uint256 _photo, address _wallet )  external {
+    function addUser(string memory _name, string memory _work_address, string memory _extra_detail,string memory _passsword,uint256 _photo, address _wallet )  external {
         require (_wallet == msg.sender);
-        uint256 safepassword = keccak256(abi.encodePacked(_passsword));
+        bytes32 safepassword = keccak256(abi.encodePacked(_passsword));
         users.push(Profile(_name,_work_address, _extra_detail,safepassword, _photo,_wallet,false ));
         uint id = users.length - 1;
         profileToUser[id] = msg.sender;
@@ -46,7 +46,7 @@ contract registerUsers {
         users[_userId].status = true;
     }
 
-    function _userLogin(address userWallet, uint256 _password) external {
+    function _userLogin(address userWallet, string memory _password) external {
 
         if (Profile[userToProfile[userWallet]].safepassword == keccak256(abi.encodePacked(_password))) {
             return true;
