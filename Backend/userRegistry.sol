@@ -1,5 +1,7 @@
 pragma solidity ^0.6.0;
 
+import './ownable.sol';
+
 contract registerUsers {
 
     struct Profile {
@@ -12,8 +14,10 @@ contract registerUsers {
 
     Profile[] private users;
 
+    event newUser();
+
     function addUser(string _name, string _work_address string _extra_deatil,uint256 _photo address _wallet ) {
-        
+
         
     }
     

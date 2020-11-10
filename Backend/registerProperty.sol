@@ -21,15 +21,17 @@ contract propertyRegister is userRegistry  {
    mapping (uint => address) propertyToOwner;
    event newProperty();
 
-   function _addProperty(){
+   function _addProperty() external{
 
    }
 
-    function _approveProperty() {
+    function _approveProperty() external {
 
     }
 
-    function editDetails 
+    function editDetails() {
+        
+    } 
 
 
 }
