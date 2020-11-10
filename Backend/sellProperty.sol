@@ -20,11 +20,11 @@ contract PropertySale is registerProperty{
         properties[propertyId].saleStatus = true;
         old_owner = propertyToOwner[propertyId];
         propertyCount[old_owner] --;
-        return (msg.sender, "Please wait for not more than 24 hours to effect the transfer";       
+        return (msg.sender, "Please wait for not more than 24 hours to effect the transfer");       
     }
 
     function effectTransfer(uint propertyId, uint amount, address _new_owner) external onlyOwner{
-        require(amount == properties[propertyId].price, "You have input the wrong amount")
+        require(amount == properties[propertyId].price, "You have input the wrong amount");
         address payable recipient = propertyToOwner[propertyId];
         recepient.transfer(amount);
         propertyToOwner[propertyId] = new_owner;

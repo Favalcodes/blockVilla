@@ -1,6 +1,6 @@
 pragma solidity ^0.6.0;
 
-import './ownable.sol';
+import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
 contract registerUsers {
 
@@ -22,7 +22,7 @@ contract registerUsers {
         string extra_detail;
         uint256 photo;
         address wallet;
-        bool status
+        bool status;
     }
 
     Profile[] private users;
@@ -30,11 +30,12 @@ contract registerUsers {
 
     event newUser(uint id, string name, string work_address, string extra_detail);
 
-    function addUser(string memory _name, string memory _work_address string memory _extra_detail,uint256 _photo address _wallet )  external {
-        require _wallet == msg.sender;
-        uint id = users.push(Profile(_name,_work_address, _extra_detail, _photo,_wallet,false ));
+    function addUser(string memory _name, string memory _work_address, string memory _extra_detail,uint256 _photo, address _wallet )  external {
+        require (_wallet == msg.sender);
+        users.push(Profile(_name,_work_address, _extra_detail, _photo,_wallet,false ));
+        uint id = users.length - 1;
         profileToUser[id] = msg.sender;
-        emit newUser(id,_name,_work_address,_extra_detail)
+        emit newUser(id,_name,_work_address,_extra_detail);
     }
     
     function _approveUser(uint _userId) external onlyOwner {
