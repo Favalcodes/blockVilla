@@ -2,7 +2,7 @@ pragma solidity ^0.6.0;
 
 import './ownable.sol';
 
-contract registerUsers {
+contract registerUsers is ownable{
 
     struct Profile {
         string name;

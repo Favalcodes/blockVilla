@@ -1,7 +1,6 @@
 
 pragma solidity ^0.6.0;
 
-import './ownable.sol';
 import './userRegistry.sol'
 
 contract propertyRegister is userRegistry  {    
@@ -30,7 +29,7 @@ contract propertyRegister is userRegistry  {
     }
 
     function editDetails() {
-        
+
     } 
 
 
