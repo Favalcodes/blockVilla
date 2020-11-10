@@ -1,3 +1,4 @@
+// SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
 import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
@@ -51,6 +52,6 @@ contract registerUsers {
         if (Profile[userToProfile[userWallet]].safepassword == keccak256(abi.encodePacked(_password))) {
             return true;
         }
-
+    
     }
 }
