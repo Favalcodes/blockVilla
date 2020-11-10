@@ -1,7 +1,7 @@
 
 pragma solidity ^0.6.0;
 
-import './userRegistry.sol'
+import './userRegistry.sol';
 
 contract propertyRegister is userRegistry  {    
 

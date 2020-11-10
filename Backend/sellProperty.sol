@@ -1,6 +1,6 @@
 pragma solidity ^0.6.0;
 
-import './registerProperty.sol'
+import './registerProperty.sol';
 
 contract PropertySale is registerProperty{
 
