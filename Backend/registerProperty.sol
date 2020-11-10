@@ -3,7 +3,7 @@ pragma solidity ^0.6.0;
 
 import './userRegistry.sol';
 
-contract propertyRegister is userRegistry  {    
+contract propertyRegister is registerUsers  {    
 
 
    struct Property{
@@ -19,7 +19,7 @@ contract propertyRegister is userRegistry  {
 
    }
 
-   modifier usersOnly() {
+   modifier usersOnly(uint profile_id) {
        require(msg.sender == profileToUser[profile_id]);
        _;
    }  
@@ -31,7 +31,7 @@ contract propertyRegister is userRegistry  {
    
    event newProperty(string name, string location,string extraDetails, uint32 landOrHouse, uint32 rentOrSale, uint256 price);
 
-   function _addProperty(string _name, string _location,string _extraDetails, uint32 _landOrHouse, uint32 _rentOrSale, uint256 _price, uint256 _propertyDeed) external usersOnly {
+   function _addProperty(string _name, string _location,string _extraDetails, uint32 _landOrHouse, uint32 _rentOrSale, uint256 _price, uint256 _propertyDeed, uint _user_id) external usersOnly(_user_id) {
 
        properties.push(Property(_name, _location,_extraDetails, _landOrHouse, _rentOrSale, _price,_propertyDeed, false,false));
        uint id = properties.length - 1;
