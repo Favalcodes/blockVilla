@@ -1,6 +1,7 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
+
 import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
 contract registerUsers {
@@ -33,10 +34,10 @@ contract registerUsers {
 
     event newUser(uint id, string name, string work_address, string extra_detail);
 
-    function addUser(string memory _name, string memory _work_address, string memory _extra_detail,string memory _passsword,uint256 _photo, address _wallet )  external {
-        require (_wallet == msg.sender);
+    function addUser(string memory _name, string memory _work_address, string memory _extra_detail,string memory _passsword,uint256 _photo)  external {
+
         bytes32 safepassword = keccak256(abi.encodePacked(_passsword));
-        users.push(Profile(_name,_work_address, _extra_detail,safepassword, _photo,_wallet,false ));
+        users.push(Profile(_name,_work_address, _extra_detail,safepassword, _photo,msg.sender,false ));
         uint id = users.length - 1;
         profileToUser[id] = msg.sender;
         userToProfile[msg.sender] = id;
