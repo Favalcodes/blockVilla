@@ -47,11 +47,9 @@ contract registerUsers {
         users[_userId].status = true;
     }
 
-    function _userLogin(address userWallet, string memory _password) external {
-
-        if (Profile[userToProfile[userWallet]].safepassword == keccak256(abi.encodePacked(_password))) {
-            return true;
-        }
+    function _userLogin(string memory _password) external view returns(bool) {
+        
+        require(users[userToProfile[msg.sender]].password == keccak256(abi.encodePacked(_password))); 
     
     }
 }

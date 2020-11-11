@@ -7,7 +7,8 @@ contract PropertySale is propertyRegister{
 
     event _propertySold(string name, uint256 amount, address new_owner);
 
-
+    address payable recipient;
+    
     modifier rightprice (uint _propertyId) {
         require(msg.value == properties[_propertyId].price, "You have input the wrong amount");
         _;
@@ -18,7 +19,7 @@ contract PropertySale is propertyRegister{
         _;
     }
 
-    function _buyProperty(uint propertyId ) payable external usersOnly onSale(propertyId) rightprice(propertyId) returns(address, string memory) {
+    function _buyProperty(uint propertyId ) payable external usersOnly(userToProfile[msg.sender]) onSale(propertyId) rightprice(propertyId) returns(address, string memory) {
         
         properties[propertyId].saleStatus = true;
         address old_owner = propertyToOwner[propertyId];
@@ -28,7 +29,7 @@ contract PropertySale is propertyRegister{
 
     function effectTransfer(uint propertyId, uint amount, address _new_owner) external onlyOwner{
         require(amount == properties[propertyId].price, "You have input the wrong amount");
-        address payable recipient = propertyToOwner[propertyId];
+        recipient = payable(propertyToOwner[propertyId]);
         recipient.transfer(amount);
         propertyToOwner[propertyId] = _new_owner;
         propertyCount[_new_owner] ++; 
