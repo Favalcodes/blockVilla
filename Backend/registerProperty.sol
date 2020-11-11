@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
-pragma experimental ABIEncoderV2;
+// pragma experimental ABIEncoderV2;
 
 import './userRegistry.sol';
 
@@ -46,9 +46,23 @@ contract propertyRegister is registerUsers  {
         properties[_propertyId].status = true;
     }
 
-    // function _viewProperties() view public returns(struct[] memory) {
-    //     return properties;
-    // } 
+    function _viewProperties() view public {
+        uint _length = properties.length - 1;
+        for (uint i=0; i<_length; i++) {
+          
+          if (properties[i].status == true && properties[i].saleStatus == false) {
+            
+            properties[i].name;
+            properties[i].location;
+            properties[i].extraDetails;
+            properties[i].landOrHouse;
+            properties[i].rentOrSale;
+            properties[i].price;
+          }
+          
+          
+        }
+    }
     
     
 

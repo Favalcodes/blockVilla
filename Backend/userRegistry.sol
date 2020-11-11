@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
-pragma experimental ABIEncoderV2;
+// pragma experimental ABIEncoderV2;
 
 import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
@@ -48,10 +48,13 @@ contract registerUsers {
         users[_userId].status = true;
     }
 
-    // function _viewUserProfile(uint _userId) public view returns(Profile memory) {
-        
-    //     users[_userId];
-    // }
+    function _viewUserProfile(uint _userId) public view  {
+        require(msg.sender == users[_userId].wallet);
+        users[_userId].name;
+        users[_userId].work_address;
+        users[_userId].extra_detail;
+        users[_userId].photo;
+    }
 
     function _userLogin(string memory _password) external view returns(bool) {
         
