@@ -46,7 +46,7 @@ contract propertyRegister is registerUsers  {
         properties[_propertyId].status = true;
     }
 
-    // function _viewProperties() view public returns(Property[] memory) {
+    // function _viewProperties() view public returns(struct[] memory) {
     //     return properties;
     // } 
     

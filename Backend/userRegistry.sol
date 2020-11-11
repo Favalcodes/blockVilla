@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
-
+pragma experimental ABIEncoderV2;
 
 import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
@@ -13,7 +13,7 @@ contract registerUsers {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner);
+        require(msg.sender == owner, "You are not the admin");
         _;
     }
 
@@ -48,9 +48,14 @@ contract registerUsers {
         users[_userId].status = true;
     }
 
+    // function _viewUserProfile(uint _userId) public view returns(Profile memory) {
+        
+    //     users[_userId];
+    // }
+
     function _userLogin(string memory _password) external view returns(bool) {
         
-        require(users[userToProfile[msg.sender]].password == keccak256(abi.encodePacked(_password))); 
+        require(users[userToProfile[msg.sender]].password == keccak256(abi.encodePacked(_password)), "Wrong password"); 
     
     }
 }
