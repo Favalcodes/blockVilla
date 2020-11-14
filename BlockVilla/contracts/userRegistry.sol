@@ -56,9 +56,10 @@ contract registerUsers {
         users[_userId].photo;
     }
 
-    function _userLogin(string calldata _password) external view returns(bool) {
+    function _userLogin(string calldata _password) external view returns(bool, string memory) {
         
         require(users[userToProfile[msg.sender]].password == keccak256(abi.encodePacked(_password)), "Wrong password"); 
+        return (true, "User logged in succefully");
     
     }
 }
