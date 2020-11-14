@@ -32,7 +32,7 @@ contract propertyRegister is registerUsers  {
    
    event newProperty(string name, string location,string extraDetails, uint32 landOrHouse, uint32 rentOrSale, uint256 price);
 
-   function _addProperty(string memory _name, string memory _location,string memory _extraDetails, uint32 _landOrHouse, uint32 _rentOrSale, uint256 _price, uint256 _propertyDeed, uint _user_id) external usersOnly(_user_id) {
+   function _addProperty(string calldata _name, string calldata _location,string calldata _extraDetails, uint32 _landOrHouse, uint32 _rentOrSale, uint256 _price, uint256 _propertyDeed, uint _user_id) external usersOnly(_user_id) {
 
        properties.push(Property(_name, _location,_extraDetails, _landOrHouse, _rentOrSale, _price,_propertyDeed, false,false));
        uint id = properties.length - 1;
