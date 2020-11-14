@@ -2,7 +2,7 @@
 pragma solidity ^0.6.0;
 // pragma experimental ABIEncoderV2;
 
-import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
+// import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
 contract registerUsers {
 
@@ -34,7 +34,7 @@ contract registerUsers {
 
     event newUser(uint id, string name, string work_address, string extra_detail);
 
-    function addUser(string memory _name, string memory _work_address, string memory _extra_detail,string memory _passsword,uint256 _photo)  external {
+    function addUser(string calldata _name, string calldata _work_address, string calldata _extra_detail,string calldata _passsword,uint256 _photo)  external {
 
         bytes32 safepassword = keccak256(abi.encodePacked(_passsword));
         users.push(Profile(_name,_work_address, _extra_detail,safepassword, _photo,msg.sender,false ));
@@ -56,10 +56,10 @@ contract registerUsers {
         users[_userId].photo;
     }
 
-    function _userLogin(string memory _password) external view returns(bool, string memory ) {
+    function _userLogin(string calldata _password) external view returns(bool, string memory) {
         
-        require(users[userToProfile[msg.sender]].password == keccak256(abi.encodePacked(_password)), "Wrong password");
-        return (true, "User logged in successful");
+        require(users[userToProfile[msg.sender]].password == keccak256(abi.encodePacked(_password)), "Wrong password"); 
+        return (true, "User logged in succefully");
     
     }
 }

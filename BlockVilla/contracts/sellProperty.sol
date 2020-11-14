@@ -9,8 +9,8 @@ contract PropertySale is propertyRegister{
 
     address payable recipient;
     
-    modifier rightPrice (uint _propertyId) {
-        require(msg.value == properties[_propertyId].price, "You have input the right amount");
+    modifier rightprice (uint _propertyId) {
+        require(msg.value == properties[_propertyId].price, "You have to input the right amount");
         _;
     }
 
@@ -27,8 +27,8 @@ contract PropertySale is propertyRegister{
         return (msg.sender, "Please wait for not more than 24 hours to effect the transfer");       
     }
 
-    function effectTransfer(uint propertyId, uint amount, address _newOwner) external onlyOwner{
-        require(amount == properties[propertyId].price, "You have input the wrong amount");
+    function effectTransfer(uint propertyId, uint amount, address _new_owner) external onlyOwner{
+        require(amount == properties[propertyId].price, "You have to input the right amount");
         recipient = payable(propertyToOwner[propertyId]);
         recipient.transfer(amount);
         propertyToOwner[propertyId] = _newOwner;
