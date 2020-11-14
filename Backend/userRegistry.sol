@@ -13,7 +13,7 @@ contract registerUsers {
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner, "You are not the admin");
+        require(msg.sender == owner, "You are the owner, not an admin");
         _;
     }
 
@@ -56,9 +56,10 @@ contract registerUsers {
         users[_userId].photo;
     }
 
-    function _userLogin(string memory _password) external view returns(bool) {
+    function _userLogin(string memory _password) external view returns(bool, string memory ) {
         
-        require(users[userToProfile[msg.sender]].password == keccak256(abi.encodePacked(_password)), "Wrong password"); 
+        require(users[userToProfile[msg.sender]].password == keccak256(abi.encodePacked(_password)), "Wrong password");
+        return (true, "User logged in successful");
     
     }
 }

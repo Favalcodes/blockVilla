@@ -1,0 +1,295 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "extraDetails",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "landOrHouse",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "rentOrSale",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"name": "newProperty",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "work_address",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "extra_detail",
+						"type": "string"
+					}
+				],
+				"name": "newUser",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_location",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_extraDetails",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_landOrHouse",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_rentOrSale",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_propertyDeed",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_userId",
+						"type": "uint256"
+					}
+				],
+				"name": "_addProperty",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_propertyId",
+						"type": "uint256"
+					}
+				],
+				"name": "_approveProperty",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_userId",
+						"type": "uint256"
+					}
+				],
+				"name": "_approveUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_password",
+						"type": "string"
+					}
+				],
+				"name": "_userLogin",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "_viewProperties",
+				"outputs": [],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_userId",
+						"type": "uint256"
+					}
+				],
+				"name": "_viewUserProfile",
+				"outputs": [],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_work_address",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_extra_detail",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_passsword",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_photo",
+						"type": "uint256"
+					}
+				],
+				"name": "addUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/registerProperty.sol": "propertyRegister"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/GSN/Context.sol": {
+			"keccak256": "0xdb26cbf4d028490f49831a7865c2fe1b28db44b535ca8d343785a3b768aae183",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://840b14ce0315c47d49ba328f1f9fa7654ded1c9e1559e6c5e777a7b2dc28bf0a",
+				"dweb:/ipfs/QmTLLabn4wcfGro9LEmUXUN2nwKqZSotXMvjDCLXEnLtZP"
+			]
+		},
+		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol": {
+			"keccak256": "0x4bd6402ca6b3419008c2b482aff54e66836e8cb4eba2680e42ac5884ae6424fc",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://8f9f711fb8d0d92aeea1c327e3845d13ca1fa8f142e47f8723cd5b3106fb29a3",
+				"dweb:/ipfs/QmVQUReDW9f4zGqhizwHnyU8EntMs95tbASdqkGncnikba"
+			]
+		},
+		"localhost/registerProperty.sol": {
+			"keccak256": "0xf6b811571c66d349a66b2cd04b6eaa534cd6e2e3b2b4d157932234013d10958f",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://42b8f8c1436f876f6fb06576df8c49ef3238ccbd5b89fcafe6da038fdfe7dad7",
+				"dweb:/ipfs/Qme52KQEpQ6npP9NAkzveW7FhrgkFyjUbZqnfJjeijSUmQ"
+			]
+		},
+		"localhost/userRegistry.sol": {
+			"keccak256": "0xc5e7fedda70c13852097fe4be00d4f85fa747102149836b83ba7893d3c551741",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://dece8b992e4a98197e2d2585dc44ced659e57d2d6a5f5e522791bdc2aa848348",
+				"dweb:/ipfs/QmccDNSExXV1gRHezTbShwUa88Q4ztLTvEf7QAc8h8JCBK"
+			]
+		}
+	},
+	"version": 1
+}
