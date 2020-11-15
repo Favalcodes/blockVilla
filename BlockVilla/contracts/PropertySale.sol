@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.6.0;
 
-import './registerProperty.sol';
+import './PropertyRegister.sol';
 
-contract PropertySale is propertyRegister{
+contract PropertySale is PropertyRegister{
 
     event _propertySold(string name, uint256 amount, address new_owner);
 
