@@ -25,6 +25,9 @@
 
   <!-- Main Stylesheet File -->
   <link href="css/style.css" rel="stylesheet">
+
+  <script type="text/javascript" src="./js/bundle.js"></script>
+  <script type="text/javascript" src="./js/web3.js"></script>
 </head>
 
 <body>
@@ -236,18 +239,18 @@
                   </div> -->
                   <div class="col-md-12 mb-3">
                     <div class="form-group">
-                      <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+                      <input name="email" id="email" type="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
                       <div class="validation"></div>
                     </div>
                   </div>
                   <div class="col-md-12 mb-3">
                     <div class="form-group">
-                      <input type="password" name="password" class="form-control form-control-lg form-control-a" placeholder="Password">
+                      <input type="password" id="password" name="password" class="form-control form-control-lg form-control-a" placeholder="Password">
                       <div class="validation"></div>
                     </div>
                   </div>
                   <div class="col-md-12">
-                    <button type="submit" class="btn btn-a">Login</button>
+                    <button id="submit" type="submit" class="btn btn-a">Login</button>
                   </div>
                 </div>
               </form>
