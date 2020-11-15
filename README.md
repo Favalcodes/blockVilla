@@ -2,7 +2,7 @@
 Blockvilla is a Decentralized real estate smart contract web app that helps buyers to get their ideal property with ease without the use of any third party agent which also reduce the high cost of agent fee, payment is as transparent as crystal and you can use your ethereum or our tokens to buy properties.
 
 # How to Use
-1. Run the web app locally
+1. Run the web app locally by saving it in your local server folder
 2. To have full control of the website, you have to register and login
 3. After registering, you can explore the site and see the properties on sale
 4. Click on any property of interest to check the property details and description
