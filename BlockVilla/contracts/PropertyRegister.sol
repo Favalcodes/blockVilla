@@ -2,9 +2,9 @@
 pragma solidity ^0.6.0;
 // pragma experimental ABIEncoderV2;
 
-import './userRegistry.sol';
+import './RegisterUsers.sol';
 
-contract propertyRegister is registerUsers  {    
+contract PropertyRegister is RegisterUsers  {    
 
 
    struct Property{

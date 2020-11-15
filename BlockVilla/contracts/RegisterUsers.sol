@@ -4,7 +4,7 @@ pragma solidity ^0.6.0;
 
 // import "github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol";
 
-contract registerUsers {
+contract RegisterUsers {
 
     address owner;
 
