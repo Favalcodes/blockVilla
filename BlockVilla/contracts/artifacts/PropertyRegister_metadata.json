@@ -1,0 +1,279 @@
+{
+	"compiler": {
+		"version": "0.6.12+commit.27d51765"
+	},
+	"language": "Solidity",
+	"output": {
+		"abi": [
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "location",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "extraDetails",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "landOrHouse",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint32",
+						"name": "rentOrSale",
+						"type": "uint32"
+					},
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "price",
+						"type": "uint256"
+					}
+				],
+				"name": "newProperty",
+				"type": "event"
+			},
+			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "uint256",
+						"name": "id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "work_address",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "extra_detail",
+						"type": "string"
+					}
+				],
+				"name": "newUser",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_location",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_extraDetails",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_landOrHouse",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "_rentOrSale",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_price",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_propertyDeed",
+						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_user_id",
+						"type": "uint256"
+					}
+				],
+				"name": "_addProperty",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_propertyId",
+						"type": "uint256"
+					}
+				],
+				"name": "_approveProperty",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_userId",
+						"type": "uint256"
+					}
+				],
+				"name": "_approveUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_password",
+						"type": "string"
+					}
+				],
+				"name": "_userLogin",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "_viewProperties",
+				"outputs": [],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_userId",
+						"type": "uint256"
+					}
+				],
+				"name": "_viewUserProfile",
+				"outputs": [],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_work_address",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_extra_detail",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_passsword",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_photo",
+						"type": "uint256"
+					}
+				],
+				"name": "addUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			}
+		],
+		"devdoc": {
+			"kind": "dev",
+			"methods": {},
+			"version": 1
+		},
+		"userdoc": {
+			"kind": "user",
+			"methods": {},
+			"version": 1
+		}
+	},
+	"settings": {
+		"compilationTarget": {
+			"localhost/contracts/PropertyRegister.sol": "PropertyRegister"
+		},
+		"evmVersion": "istanbul",
+		"libraries": {},
+		"metadata": {
+			"bytecodeHash": "ipfs"
+		},
+		"optimizer": {
+			"enabled": false,
+			"runs": 200
+		},
+		"remappings": []
+	},
+	"sources": {
+		"localhost/contracts/PropertyRegister.sol": {
+			"keccak256": "0x3a799abb01ecf1b0a15232006e8abb687a15b4b9a81f08e61eab3e5499c683bb",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://7795a5412ad0d982078067ccbc1b3c49c1bf07795c0cd9795fe10131eea8984e",
+				"dweb:/ipfs/QmTvVbudZUf567mdChWp7wQp3b63NMZcLVHpBZHDrfAZoL"
+			]
+		},
+		"localhost/contracts/RegisterUsers.sol": {
+			"keccak256": "0x93ba31420e08fc290a02e545354cb35f3a82e0b28cff7a048bd7cd5aa3b868df",
+			"license": "MIT",
+			"urls": [
+				"bzz-raw://bc2886b9e2c8696da8f52cbdf2e6514c3afcc758ab59de22006e14af2779dfcb",
+				"dweb:/ipfs/QmStXP1iKmzv2K6x8RJ4eKquqZfBzmuDRSXae9tqBJaMwV"
+			]
+		}
+	},
+	"version": 1
+}
