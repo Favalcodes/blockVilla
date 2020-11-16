@@ -1,5 +1,26 @@
+<?php
+// Include config file
+require_once "config.php";
+
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+// }
+// if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+//   header("location: login.php");
+//   exit;
+// }
+
+// SQL query to select data from database 
+$sql = "SELECT * FROM users";
+$result = $link->query($sql) or die("Error: " . mysqli_error($link));
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>BlockVilla</title>
@@ -126,58 +147,61 @@
   <!--/ Nav Star /-->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
-        aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="index.html">Block<span class="color-b">Villa</span></a>
-      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
-        data-target="#navbarTogglerDemo01" aria-expanded="false">
+      <a class="navbar-brand text-brand" href="index.php">Block<span class="color-b">Villa</span></a>
+      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
         <span class="fa fa-search" aria-hidden="true"></span>
       </button>
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="about.php">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="property-grid.html">Property</a>
+            <a class="nav-link active" href="property-grid.php">Property</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="blog-grid.html">Blog</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Pages
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="property-single.html">Property Single</a>
-              <a class="dropdown-item" href="blog-single.html">Blog Single</a>
-              <a class="dropdown-item" href="agents-grid.html">Agents Grid</a>
-              <a class="dropdown-item" href="agent-single.html">Agent Single</a>
-            </div>
-          </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="contact.php">Contact</a>
           </li>
         </ul>
       </div>
-      <button type="button" class="btn btn-b-n d-none d-md-block mr-1" >
-        <a href="login.html" class="text-white">Login</a>
-      </button>
-      <button type="button" class="btn btn-b-n d-none d-md-block mr-1">
-        <a href="reg.html" class="text-white">Sign Up</a>
-      </button>
-      <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse"
-        data-target="#navbarTogglerDemo01" aria-expanded="false">
-        <span class="fa fa-search" aria-hidden="true"></span>
-      </button>
+      <?php
+      if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+        while ($tablerow = mysqli_fetch_array($result)) {
+      ?>
+
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?php echo $tablerow['full_name'] ?>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="dashboard.php">Dashboard</a>
+                <a class="dropdown-item" href="logout.php">Logout</a>
+              </div>
+            </li>
+          </ul>
+        <?php }
+      } else { ?>
+
+        <button type="button" class="btn btn-b-n d-none d-md-block mr-1">
+          <a href="login.php" class="text-white">Login</a>
+        </button>
+        <button type="button" class="btn btn-b-n d-none d-md-block mr-1">
+          <a href="reg.php" class="text-white">Sign Up</a>
+        </button>
+        <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+          <span class="fa fa-search" aria-hidden="true"></span>
+        </button>
+
+      <?php } ?>
     </div>
   </nav>
   <!--/ Nav End /-->
@@ -196,7 +220,7 @@
           <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="#">Home</a>
+                <a href="index.php">Home</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
                 Properties Grid
@@ -711,4 +735,5 @@
   <script src="js/main.js"></script>
 
 </body>
+
 </html>

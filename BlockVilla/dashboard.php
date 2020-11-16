@@ -1,3 +1,21 @@
+<?php
+// Include config file
+require_once "config.php";
+
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+  header("location: login.php");
+  exit;
+}
+
+// SQL query to select data from database 
+$sql = "SELECT * FROM users";
+$result = $link->query($sql) or die("Error: " . mysqli_error($link));
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,155 +50,49 @@
 <body>
 
   <div class="click-closed"></div>
-  <!--/ Form Search Star /-->
-  <!-- <div class="box-collapse">
-    <div class="title-box-d">
-      <h3 class="title-d">Search Property</h3>
-    </div>
-    <span class="close-box-collapse right-boxed ion-ios-close"></span>
-    <div class="box-collapse-wrap form">
-      <form class="form-a">
-        <div class="row">
-          <div class="col-md-12 mb-2">
-            <div class="form-group">
-              <label for="Type">Keyword</label>
-              <input type="text" class="form-control form-control-lg form-control-a" placeholder="Keyword">
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="Type">Type</label>
-              <select class="form-control form-control-lg form-control-a" id="Type">
-                <option>All Type</option>
-                <option>For Rent</option>
-                <option>For Sale</option>
-                <option>Open House</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="city">City</label>
-              <select class="form-control form-control-lg form-control-a" id="city">
-                <option>All City</option>
-                <option>Alabama</option>
-                <option>Arizona</option>
-                <option>California</option>
-                <option>Colorado</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="bedrooms">Bedrooms</label>
-              <select class="form-control form-control-lg form-control-a" id="bedrooms">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="garages">Garages</label>
-              <select class="form-control form-control-lg form-control-a" id="garages">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-                <option>04</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="bathrooms">Bathrooms</label>
-              <select class="form-control form-control-lg form-control-a" id="bathrooms">
-                <option>Any</option>
-                <option>01</option>
-                <option>02</option>
-                <option>03</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-6 mb-2">
-            <div class="form-group">
-              <label for="price">Min Price</label>
-              <select class="form-control form-control-lg form-control-a" id="price">
-                <option>Unlimite</option>
-                <option>$50,000</option>
-                <option>$100,000</option>
-                <option>$150,000</option>
-                <option>$200,000</option>
-              </select>
-            </div>
-          </div>
-          <div class="col-md-12">
-            <button type="submit" class="btn btn-b">Search Property</button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div> -->
-  <!--/ Form Search End /-->
 
   <!--/ Nav Star /-->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
-        aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="index.html">Block<span class="color-b">Villa</span></a>
-      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
-        data-target="#navbarTogglerDemo01" aria-expanded="false">
+      <a class="navbar-brand text-brand" href="index.php">Block<span class="color-b">Villa</span></a>
+      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
         <span class="fa fa-search" aria-hidden="true"></span>
       </button>
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="about.php">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="property-grid.html">Property</a>
+            <a class="nav-link" href="property-grid.php">Property</a>
           </li>
-          <!-- <li class="nav-item">
-            <a class="nav-link" href="blog-grid.html">Blog</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Pages
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="property-single.html">Property Single</a>
-              <a class="dropdown-item" href="blog-single.html">Blog Single</a>
-              <a class="dropdown-item" href="agents-grid.html">Agents Grid</a>
-              <a class="dropdown-item" href="agent-single.html">Agent Single</a>
-            </div>
-          </li> -->
           <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link" href="contact.php">Contact</a>
           </li>
         </ul>
       </div>
       <ul class="navbar-nav">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-            aria-haspopup="true" aria-expanded="false">
-            Full Name
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="dashboard.html">Dashboard</a>
-            <a class="dropdown-item" href="login.html">Logout</a>
-          </div>
-        </li>
+        <?php
+        while ($tablerow = mysqli_fetch_array($result)) {
+        ?>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <?php echo $tablerow['full_name'] ?>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="dashboard.php">Dashboard</a>
+              <a class="dropdown-item" href="logout.php">Logout</a>
+            </div>
+          </li>
+        <?php } ?>
       </ul>
     </div>
   </nav>
@@ -200,7 +112,7 @@
           <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <a href="index.php">Home</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
                 Dashboard
@@ -213,25 +125,22 @@
   </section>
   <!--/ Intro Single End /-->
 
-  <!--/ Contact Star /-->
+  <!--/ Contact Start /-->
   <section class="contact">
     <div class="container tabs">
       <div class="row">
         <div class="col-3">
           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab"
-              aria-controls="v-pills-home" aria-selected="true">Home</a>
-            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab"
-              aria-controls="v-pills-profile" aria-selected="false">Stat</a>
-            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab"
-              aria-controls="v-pills-messages" aria-selected="false">Sell</a>
+            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Stat</a>
+            <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Sell</a>
             <a class="nav-link" href="login.html">Logout</a>
           </div>
         </div>
         <div class="col-9">
           <div class="tab-content" id="v-pills-tabContent">
             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-              Home</div>
+              Dashboard</div>
             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
               <table class="table table-reponsive-lg table-lg table-striped w-100">
                 <thead>
@@ -266,7 +175,7 @@
             </div>
             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
               <div class="form-container">
-                <form action="" role="form">
+                <form action="" method="POST" role="form" enctype="multipart/form-data">
                   <input id='step2' type='checkbox'>
                   <input id='step3' type='checkbox'>
 
@@ -281,8 +190,7 @@
                         <option value="1">Sell</option>
                         <option value="2">Rent</option>
                       </select>
-                      <input type="text" id="location" class="form-control" placeholder="Location"
-                        aria-describedby="sizing-addon1">
+                      <input type="text" id="location" class="form-control" placeholder="Location" aria-describedby="sizing-addon1">
                       <div class="btn-group btn-group-lg" role="group" aria-label="...">
                         <label for='step2' id="continue-step2" class="continue">
                           <div class="btn btn-default btn-success btn-lg">Continue</div>
@@ -296,9 +204,13 @@
                       <div class="panel-heading">
                         <h3 class="panel-title">Step 2</h3>
                       </div>
-                      <label for="exampleFormControlFile1">Property Images (minimum of 3 images) </label>
-                      <input type="file" class="form-control-file" id="exampleFormControlFile1" multiple>
-                      <!-- <label>Number of Bath</label> -->
+                      <div class="custom-file">
+                        <input type="file" name="fileUpload[]" class="custom-file-input" id="chooseFile" multiple>
+                        <label class="custom-file-label" for="chooseFile">Select images (min of 3 images)</label>
+                      </div>
+                      <div class="imgGallery">
+                        <!-- image preview -->
+                      </div>
                       <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                         <option selected>Number of Bath</option>
                         <option value="1">1</option>
@@ -312,7 +224,6 @@
                         <option value="9">9</option>
                         <option value="10">10</option>
                       </select>
-                      <!-- <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Number of Rooms</label> -->
                       <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
                         <option selected>Number of Room(s)</option>
                         <option value="1">1</option>
@@ -331,8 +242,6 @@
                         <label for='step2' id="back-step2" class="back">
                           <div class="btn btn-default btn-lg" role="button">Back</div>
                         </label>
-
-
                         <label for='step3' id="continue-step3" class="continue">
                           <div class="btn btn-default btn-success btn-lg" role="button">Continue</div>
                         </label>
@@ -346,11 +255,19 @@
                       <div class="panel-heading">
                         <h3 class="panel-title">Step 3</h3>
                       </div>
-                      <label for="exampleFormControlFile1">Documents(Proof of Ownership)</label>
-                      <input type="file" class="form-control-file" id="exampleFormControlFile1">
-                      <input type="text" id="amount" class="form-control" placeholder="Amount"
-                        aria-describedby="sizing-addon1">
+                      <div class="custom-file">
+                        <input type="file" name="docUpload[]" class="custom-file-input" id="chooseDoc" multiple>
+                        <label class="custom-file-label" for="chooseFile">Select Document(Proof of Owner)</label>
+                      </div>
+                      <div class="docGallery">
+                        <!-- image preview -->
+                      </div>
+                      <input type="text" id="amount" class="form-control" placeholder="Amount" aria-describedby="sizing-addon1">
                       <textarea id="message" class="form-control" placeholder="Full Description"></textarea>
+                      <label for="exampleFormControlFile1">Contact Details <span>(contact available to buyers/clients)</span></label>
+                      <input type="text" id="whatsapp" class="form-control" placeholder="WhatsApp" name="whatsapp" aria-describedby="sizing-addon1">
+                      <input type="text" id="call" class="form-control" placeholder="Call Number" name="call" aria-describedby="sizing-addon1" required>
+                      <input type="text" id="twitter" class="form-control" placeholder="Twitter" name="twitter" aria-describedby="sizing-addon1">
                       <div class="btn-group btn-group-lg" role="group" aria-label="...">
                         <label for='step3' id="back-step3" class="back">
                           <div class="btn btn-default btn-lg">Back</div>
@@ -533,10 +450,40 @@
   <a href="#" class="back-to-top"><i class="fa fa-chevron-up"></i></a>
   <div id="preloader"></div>
 
-  <!-- <script src="js/form.js"></script> -->
   <!-- JavaScript Libraries -->
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/jquery/jquery-migrate.min.js"></script>
+
+<script>
+  $(function () {
+    // Multiple images preview with JavaScript
+    var multiImgPreview = function (input, imgPreviewPlaceholder) {
+
+      if (input.files) {
+        var filesAmount = input.files.length;
+
+        for (i = 0; i < filesAmount; i++) {
+          var reader = new FileReader();
+
+          reader.onload = function (event) {
+            $($.parseHTML('<img>')).attr('src', event.target.result).appendTo(imgPreviewPlaceholder);
+          }
+
+          reader.readAsDataURL(input.files[i]);
+        }
+      }
+
+    };
+
+    $('#chooseFile').on('change', function () {
+      multiImgPreview(this, 'div.imgGallery');
+    });
+    $('#chooseDoc').on('change', function () {
+      multiImgPreview(this, 'div.docGallery');
+    });
+  });
+</script>
+
   <script src="lib/popper/popper.min.js"></script>
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
   <script src="lib/easing/easing.min.js"></script>
