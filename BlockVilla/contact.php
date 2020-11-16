@@ -1,5 +1,26 @@
+<?php
+// Include config file
+require_once "config.php";
+
+// Initialize the session
+session_start();
+
+// Check if the user is logged in, if not then redirect him to login page
+// }
+// if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
+//   header("location: login.php");
+//   exit;
+// }
+
+// SQL query to select data from database 
+$sql = "SELECT * FROM users";
+$result = $link->query($sql) or die("Error: " . mysqli_error($link));
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8">
   <title>BlockVilla</title>
@@ -8,8 +29,8 @@
   <meta content="" name="description">
 
   <!-- Favicons -->
-  <link href="img/favicon.png" rel="icon">
-  <link href="img/apple-touch-icon.png" rel="apple-touch-icon">
+  <link href="img/screenshot_20201111-173542_2.png" rel="icon">
+  <link href="img/screenshot_20201111-173542_2.png" rel="apple-touch-icon">
 
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
@@ -31,7 +52,7 @@
 
   <div class="click-closed"></div>
   <!--/ Form Search Star /-->
-  <!-- <div class="box-collapse">
+  <div class="box-collapse">
     <div class="title-box-d">
       <h3 class="title-d">Search Property</h3>
     </div>
@@ -61,10 +82,10 @@
               <label for="city">City</label>
               <select class="form-control form-control-lg form-control-a" id="city">
                 <option>All City</option>
-                <option>Alabama</option>
-                <option>Arizona</option>
-                <option>California</option>
-                <option>Colorado</option>
+                <option>Lagos</option>
+                <option>Uganda</option>
+                <option>Abuja</option>
+                <option>Portharcourt</option>
               </select>
             </div>
           </div>
@@ -120,58 +141,67 @@
         </div>
       </form>
     </div>
-  </div> -->
+  </div>
   <!--/ Form Search End /-->
 
   <!--/ Nav Star /-->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault"
-        aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
         <span></span>
         <span></span>
       </button>
-      <a class="navbar-brand text-brand" href="index.html">Block<span class="color-b">Villa</span></a>
-      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse"
-        data-target="#navbarTogglerDemo01" aria-expanded="false">
+      <a class="navbar-brand text-brand" href="index.php">Block<span class="color-b">Villa</span></a>
+      <button type="button" class="btn btn-link nav-search navbar-toggle-box-collapse d-md-none" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
         <span class="fa fa-search" aria-hidden="true"></span>
       </button>
       <div class="navbar-collapse collapse justify-content-center" id="navbarDefault">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="index.html">Home</a>
+            <a class="nav-link" href="index.php">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="about.html">About</a>
+            <a class="nav-link" href="about.php">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="property-grid.html">Property</a>
+            <a class="nav-link" href="property-grid.php">Property</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" href="blog-grid.html">Blog</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-              aria-haspopup="true" aria-expanded="false">
-              Pages
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="property-single.html">Property Single</a>
-              <a class="dropdown-item" href="blog-single.html">Blog Single</a>
-              <a class="dropdown-item" href="agents-grid.html">Agents Grid</a>
-              <a class="dropdown-item" href="agent-single.html">Agent Single</a>
-            </div>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="contact.html">Contact</a>
+            <a class="nav-link active" href="contact.php">Contact</a>
           </li>
         </ul>
       </div>
-      <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse"
-        data-target="#navbarTogglerDemo01" aria-expanded="false">
-        <span class="fa fa-search" aria-hidden="true"></span>
-      </button>
+      <?php
+      if (isset($_SESSION["loggedin"]) && $_SESSION["loggedin"] === true) {
+        while ($tablerow = mysqli_fetch_array($result)) {
+      ?>
+
+          <ul class="navbar-nav">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <?php echo $tablerow['full_name'] ?>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="dashboard.php">Dashboard</a>
+                <a class="dropdown-item" href="logout.php">Logout</a>
+              </div>
+            </li>
+          </ul>
+        <?php }
+      } else { ?>
+
+        <button type="button" class="btn btn-b-n d-none d-md-block mr-1">
+          <a href="login.php" class="text-white">Login</a>
+        </button>
+        <button type="button" class="btn btn-b-n d-none d-md-block mr-1">
+          <a href="reg.php" class="text-white">Sign Up</a>
+        </button>
+        <button type="button" class="btn btn-b-n navbar-toggle-box-collapse d-none d-md-block" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-expanded="false">
+          <span class="fa fa-search" aria-hidden="true"></span>
+        </button>
+
+      <?php } ?>
     </div>
   </nav>
   <!--/ Nav End /-->
@@ -182,18 +212,18 @@
       <div class="row">
         <div class="col-md-12 col-lg-8">
           <div class="title-single-box">
-            <h1 class="title-single">Our Amazing Posts</h1>
-            <span class="color-text-a">Grid News</span>
+            <h1 class="title-single">Contact US</h1>
+            <span class="color-text-a">Your Feedback is Appreciated.</span>
           </div>
         </div>
         <div class="col-md-12 col-lg-4">
           <nav aria-label="breadcrumb" class="breadcrumb-box d-flex justify-content-lg-end">
             <ol class="breadcrumb">
               <li class="breadcrumb-item">
-                <a href="index.html">Home</a>
+                <a href="index.php">Home</a>
               </li>
               <li class="breadcrumb-item active" aria-current="page">
-                News Grid
+                Contact
               </li>
             </ol>
           </nav>
@@ -203,179 +233,137 @@
   </section>
   <!--/ Intro Single End /-->
 
-  <!--/ News Grid Star /-->
-  <section class="news-grid grid">
+  <!--/ Contact Star /-->
+  <section class="contact">
     <div class="container">
       <div class="row">
-        <div class="col-md-4">
-          <div class="card-box-b card-shadow news-box">
-            <div class="img-box-b">
-              <img src="img/post-1.jpg" alt="" class="img-b img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-header-b">
-                <div class="card-category-b">
-                  <a href="#" class="category-b">Travel</a>
-                </div>
-                <div class="card-title-b">
-                  <h2 class="title-2">
-                    <a href="blog-single.html">Travel is comming
-                      <br> new</a>
-                  </h2>
-                </div>
-                <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-b card-shadow news-box">
-            <div class="img-box-b">
-              <img src="img/post-2.jpg" alt="" class="img-b img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-header-b">
-                <div class="card-category-b">
-                  <a href="blog-single.html" class="category-b">Travel</a>
-                </div>
-                <div class="card-title-b">
-                  <h2 class="title-2">
-                    <a href="blog-single.html">Travel is comming
-                      <br> new</a>
-                  </h2>
-                </div>
-                <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-b card-shadow news-box">
-            <div class="img-box-b">
-              <img src="img/post-3.jpg" alt="" class="img-b img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-header-b">
-                <div class="card-category-b">
-                  <a href="#" class="category-b">Travel</a>
-                </div>
-                <div class="card-title-b">
-                  <h2 class="title-2">
-                    <a href="blog-single.html">Travel is comming
-                      <br> new</a>
-                  </h2>
-                </div>
-                <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-b card-shadow news-box">
-            <div class="img-box-b">
-              <img src="img/post-4.jpg" alt="" class="img-b img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-header-b">
-                <div class="card-category-b">
-                  <a href="#" class="category-b">Travel</a>
-                </div>
-                <div class="card-title-b">
-                  <h2 class="title-2">
-                    <a href="blog-single.html">Travel is comming
-                      <br> new</a>
-                  </h2>
-                </div>
-                <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-b card-shadow news-box">
-            <div class="img-box-b">
-              <img src="img/post-5.jpg" alt="" class="img-b img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-header-b">
-                <div class="card-category-b">
-                  <a href="#" class="category-b">Travel</a>
-                </div>
-                <div class="card-title-b">
-                  <h2 class="title-2">
-                    <a href="blog-single.html">Travel is comming
-                      <br> new</a>
-                  </h2>
-                </div>
-                <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="card-box-b card-shadow news-box">
-            <div class="img-box-b">
-              <img src="img/post-6.jpg" alt="" class="img-b img-fluid">
-            </div>
-            <div class="card-overlay">
-              <div class="card-header-b">
-                <div class="card-category-b">
-                  <a href="#" class="category-b">Travel</a>
-                </div>
-                <div class="card-title-b">
-                  <h2 class="title-2">
-                    <a href="blog-single.html">Travel is comming
-                      <br> new</a>
-                  </h2>
-                </div>
-                <div class="card-date">
-                  <span class="date-b">18 Sep. 2017</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
         <div class="col-sm-12">
-          <nav class="pagination-a">
-            <ul class="pagination justify-content-end">
-              <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">
-                  <span class="ion-ios-arrow-back"></span>
-                </a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item active">
-                <a class="page-link" href="#">2</a>
-              </li>
-              <li class="page-item">
-                <a class="page-link" href="#">3</a>
-              </li>
-              <li class="page-item next">
-                <a class="page-link" href="#">
-                  <span class="ion-ios-arrow-forward"></span>
-                </a>
-              </li>
-            </ul>
-          </nav>
+          <div class="contact-map box">
+            <div id="map" class="contact-map">
+              <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3022.1422937950147!2d-73.98731968482413!3d40.75889497932681!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25855c6480299%3A0x55194ec5a1ae072e!2sTimes+Square!5e0!3m2!1ses-419!2sve!4v1510329142834" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-12 section-t8">
+          <div class="row">
+            <div class="col-md-7">
+              <form class="form-a contactForm" action="" method="post" role="form">
+                <div id="sendmessage">Your message has been sent. Thank you!</div>
+                <div id="errormessage"></div>
+                <div class="row">
+                  <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                      <input type="text" name="name" class="form-control form-control-lg form-control-a" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars">
+                      <div class="validation"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <div class="form-group">
+                      <input name="email" type="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
+                      <div class="validation"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                      <input type="url" name="subject" class="form-control form-control-lg form-control-a" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject">
+                      <div class="validation"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                      <textarea name="message" class="form-control" name="message" cols="45" rows="8" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                      <div class="validation"></div>
+                    </div>
+                  </div>
+                  <div class="col-md-12">
+                    <button type="submit" class="btn btn-a">Send Message</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <div class="col-md-5 section-md-t3">
+              <div class="icon-box section-b2">
+                <div class="icon-box-icon">
+                  <span class="ion-ios-paper-plane"></span>
+                </div>
+                <div class="icon-box-content table-cell">
+                  <div class="icon-box-title">
+                    <h4 class="icon-title">Say Hello</h4>
+                  </div>
+                  <div class="icon-box-content">
+                    <p class="mb-1">Email.
+                      <span class="color-a">support@blockvilla.com</span>
+                    </p>
+                    <p class="mb-1">Phone.
+                      <span class="color-a">+234 7000000000</span>
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="icon-box section-b2">
+                <div class="icon-box-icon">
+                  <span class="ion-ios-pin"></span>
+                </div>
+                <div class="icon-box-content table-cell">
+                  <div class="icon-box-title">
+                    <h4 class="icon-title">Find us in</h4>
+                  </div>
+                  <div class="icon-box-content">
+                    <p class="mb-1">
+                      Everywhere,
+                      <br> Anytime.
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="icon-box">
+                <div class="icon-box-icon">
+                  <span class="ion-ios-redo"></span>
+                </div>
+                <div class="icon-box-content table-cell">
+                  <div class="icon-box-title">
+                    <h4 class="icon-title">Social networks</h4>
+                  </div>
+                  <div class="icon-box-content">
+                    <div class="socials-footer">
+                      <ul class="list-inline">
+                        <li class="list-inline-item">
+                          <a href="#" class="link-one">
+                            <i class="fa fa-facebook" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="#" class="link-one">
+                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="#" class="link-one">
+                            <i class="fa fa-instagram" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="#" class="link-one">
+                            <i class="fa fa-pinterest-p" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                        <li class="list-inline-item">
+                          <a href="#" class="link-one">
+                            <i class="fa fa-dribbble" aria-hidden="true"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
-  <!--/ News Grid End /-->
+  <!--/ Contact End /-->
 
   <!--/ footer Star /-->
   <section class="section-footer">
@@ -388,16 +376,15 @@
             </div>
             <div class="w-body-a">
               <p class="w-text-a color-text-a">
-                Enim minim veniam quis nostrud exercitation ullamco laboris nisi ut aliquip exea commodo consequat duis
-                sed aute irure.
+                BlockVilla is a real estate decentralized smart contract app that connects buyers or renters to properties on sale or rent. It doesn’t need a third party/agent to complete a transaction, a transaction can be fully done on the app with the use of local currency or cryptocurrency.
               </p>
             </div>
             <div class="w-footer-a">
               <ul class="list-unstyled">
                 <li class="color-a">
-                  <span class="color-text-a">Phone .</span> contact@example.com</li>
+                  <span class="color-text-a">Phone .</span> +234 700 blockVilla<br> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+254 700 BlockVilla</li>
                 <li class="color-a">
-                  <span class="color-text-a">Email .</span> +54 356 945234</li>
+                  <span class="color-text-a">Email .</span> support@blockvilla.com</li>
               </ul>
             </div>
           </div>
@@ -441,7 +428,10 @@
             <div class="w-body-a">
               <ul class="list-unstyled">
                 <li class="item-list-a">
-                  <i class="fa fa-angle-right"></i> <a href="#">Venezuela</a>
+                  <i class="fa fa-angle-right"></i> <a href="#">Nigeria</a>
+                </li>
+                <li class="item-list-a">
+                  <i class="fa fa-angle-right"></i> <a href="#">Kenya</a>
                 </li>
                 <li class="item-list-a">
                   <i class="fa fa-angle-right"></i> <a href="#">China</a>
@@ -547,4 +537,5 @@
   <script src="js/main.js"></script>
 
 </body>
+
 </html>
