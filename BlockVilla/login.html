@@ -227,7 +227,7 @@
         <div class="col-sm-12 section-t8">
           <div class="row">
             <div class="col-md-7">
-              <form class="form-a contactForm" action="" method="post" role="form">
+              <form class="form-a" id="loginForm" role="form">
                 <div id="sendmessage">Login Successful</div>
                 <div id="errormessage"></div>
                 <div class="row">
@@ -237,12 +237,7 @@
                       <div class="validation"></div>
                     </div>
                   </div> -->
-                  <div class="col-md-12 mb-3">
-                    <div class="form-group">
-                      <input name="email" id="email" type="email" class="form-control form-control-lg form-control-a" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email">
-                      <div class="validation"></div>
-                    </div>
-                  </div>
+                
                   <div class="col-md-12 mb-3">
                     <div class="form-group">
                       <input type="password" id="password" name="password" class="form-control form-control-lg form-control-a" placeholder="Password">
@@ -436,6 +431,8 @@
 
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
+  <script src="js/web3.js"></script>
+  <script src="js/login.js" type="module"></script>
 
 </body>
 </html>
