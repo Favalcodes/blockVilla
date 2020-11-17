@@ -317,7 +317,7 @@ document.getElementById("loginForm").addEventListener("submit", async function(e
     let login = await propertySale.methods.userLogin(password).call({from: account})
     console.log(login)
     if(login){
-      
+        e.submit()
     }
   })
 
