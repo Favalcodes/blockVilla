@@ -316,6 +316,7 @@ document.getElementById("userform").addEventListener("submit", async function(e)
     const name        = document.getElementById("name").value
     const workAddress = document.getElementById("workaddress").value
     const password    = document.getElementById("password").value
+    console.log(password)
   
     const account = localStorage.getItem("address")
     let user = await propertySale.methods.addUser(name, workAddress, "Realtor", password, 1234).send({ from: account})
