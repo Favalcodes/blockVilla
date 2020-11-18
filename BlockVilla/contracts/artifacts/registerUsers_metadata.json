@@ -42,14 +42,54 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "_userId",
-						"type": "uint256"
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "work_address",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "extra_detail",
+						"type": "string"
 					}
 				],
-				"name": "_approveUser",
+				"name": "userDetail",
+				"type": "event"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_name",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_work_address",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_extra_detail",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "_passsword",
+						"type": "string"
+					}
+				],
+				"name": "addUser",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -62,7 +102,7 @@
 						"type": "string"
 					}
 				],
-				"name": "_userLogin",
+				"name": "userLogin",
 				"outputs": [
 					{
 						"internalType": "bool",
@@ -86,42 +126,25 @@
 						"type": "uint256"
 					}
 				],
-				"name": "_viewUserProfile",
-				"outputs": [],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
+				"name": "viewUserProfile",
+				"outputs": [
 					{
 						"internalType": "string",
-						"name": "_name",
+						"name": "",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_work_address",
+						"name": "",
 						"type": "string"
 					},
 					{
 						"internalType": "string",
-						"name": "_extra_detail",
+						"name": "",
 						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "_passsword",
-						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_photo",
-						"type": "uint256"
 					}
 				],
-				"name": "addUser",
-				"outputs": [],
-				"stateMutability": "nonpayable",
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -138,7 +161,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/contracts/RegisterUsers.sol": "RegisterUsers"
+			"localhost/BlockVilla/contracts/RegisterUsers.sol": "RegisterUsers"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -152,12 +175,12 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/contracts/RegisterUsers.sol": {
-			"keccak256": "0x93ba31420e08fc290a02e545354cb35f3a82e0b28cff7a048bd7cd5aa3b868df",
+		"localhost/BlockVilla/contracts/RegisterUsers.sol": {
+			"keccak256": "0x6145184ce6771fce6b5a92847f67473617119e3bca6d2c17ef19876342aaeff1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://bc2886b9e2c8696da8f52cbdf2e6514c3afcc758ab59de22006e14af2779dfcb",
-				"dweb:/ipfs/QmStXP1iKmzv2K6x8RJ4eKquqZfBzmuDRSXae9tqBJaMwV"
+				"bzz-raw://41e91689dc054a0b0a447472b1ec90efedbe3891eacf05d9b9b413f2eb7eecf0",
+				"dweb:/ipfs/QmcEhLN5sNjgBxJW6ruNRdw3cBe9Mb5YVW6vpejRVfEdZt"
 			]
 		}
 	},

@@ -5,63 +5,78 @@ pragma solidity ^0.6.0;
 import './RegisterUsers.sol';
 
 contract PropertyRegister is RegisterUsers  {    
-
-
+   
+   enum SaleStatus{ pendingApproval, onSale, pendingSale, sold }
+   
    struct Property{
        string name;
        string location;
-       string extraDetails;
-       uint32 landOrHouse;
+       uint32 rooms;
+       uint32 bathrooms;
        uint32 rentOrSale;
        uint256 price;
        uint256 propertyDeed;
-       bool saleStatus;
-       bool status;
+       address ownedBy;
+       SaleStatus status;
 
    }
 
-   modifier usersOnly(uint profile_id) {
-       require(msg.sender == profileToUser[profile_id]);
+   modifier usersOnly() {
+       require(alreadyRegistered[msg.sender] == true, "Please regster into our site first");
        _;
    }  
+
+    modifier aleadyOnSite() {
+       require(alreadyRegistered[msg.sender] == true, "Please regster into our site first");
+       _;
+   } 
 
    Property[]  properties;
 
    mapping (uint => address) propertyToOwner;
    mapping (address => uint) propertyCount;
    
-   event newProperty(string name, string location,string extraDetails, uint32 landOrHouse, uint32 rentOrSale, uint256 price);
+   event newProperty(uint _id, string name, string location,uint32 rooms, uint32 bathrooms, uint32 rentOrSale, uint256 price);
 
-   function _addProperty(string calldata _name, string calldata _location,string calldata _extraDetails, uint32 _landOrHouse, uint32 _rentOrSale, uint256 _price, uint256 _propertyDeed, uint _user_id) external usersOnly(_user_id) {
+   function addProperty(string calldata _name, string calldata _location,uint32  _rooms, uint32 _bathrooms, uint32 _rentOrSale, uint256 _price, uint256 _propertyDeed) external usersOnly {
 
-       properties.push(Property(_name, _location,_extraDetails, _landOrHouse, _rentOrSale, _price,_propertyDeed, false,false));
+       properties.push(Property(_name, _location,_rooms, _bathrooms, _rentOrSale, _price,_propertyDeed,msg.sender, SaleStatus.pendingApproval ));
        uint id = properties.length - 1;
        propertyToOwner[id] = msg.sender;
        propertyCount[msg.sender] ++;
-       emit newProperty(_name, _location, _extraDetails, _landOrHouse, _rentOrSale, _price);
+       emit newProperty(id, _name, _location, _rooms, _bathrooms, _rentOrSale, _price);
 
    }
 
-    function _approveProperty(uint _propertyId) external onlyOwner {
-        properties[_propertyId].status = true;
+    function approveProperty(uint _propertyId) external onlyOwner returns(string memory, string memory ) {
+        
+        require(properties[_propertyId].status == SaleStatus.pendingApproval, "This property is already approved");
+        properties[_propertyId].status = SaleStatus.onSale;
+        string memory name = properties[_propertyId].name;
+        string memory locatedAt = properties[_propertyId].location;
+        return(name, locatedAt) ;
     }
 
-    function _viewProperties() view public {
-        uint _length = properties.length - 1;
-        for (uint i=0; i < _length; i++) {
-          
-          if (properties[i].status == true && properties[i].saleStatus == false) {
+    function numberOfProperties() external onlyOwner view returns(uint) {
+        uint number = properties.length;
+        return number;
+    }
+    
+    function viewProperty(uint _id) view public returns(string memory,string memory, uint32,uint32,uint32,uint256) {
+        
+          if (properties[_id].status == SaleStatus.onSale) {
             
-            properties[i].name;
-            properties[i].location;
-            properties[i].extraDetails;
-            properties[i].landOrHouse;
-            properties[i].rentOrSale;
-            properties[i].price;
-          }
+            string memory name = properties[_id].name;
+            string memory locatedAt = properties[_id].location;
+            uint32 roomNo =properties[_id].rooms;
+            uint32 bath = properties[_id].bathrooms;
+            uint32 forRentOrSale = properties[_id].rentOrSale;
+            uint256 pricing = properties[_id].price;
+            return (name, locatedAt, roomNo, bath, forRentOrSale,pricing);
+          } 
           
           
-        }
+        
     }
     
     
