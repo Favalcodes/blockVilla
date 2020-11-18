@@ -369,7 +369,7 @@ mysqli_close($link);
   <div class="click-closed"></div>
 
   <!--/ Nav Star /-->
-  <!-- <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
@@ -412,7 +412,7 @@ mysqli_close($link);
         <?php } ?>
       </ul>
     </div>
-  </nav> -->
+  </nav>
   <!--/ Nav End /-->
 
   <!--/ Intro Single star /-->
