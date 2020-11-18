@@ -731,6 +731,10 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
   <!-- Contact Form JavaScript File -->
   <script src="contactform/contactform.js"></script>
 
+  <script src="js/metamask.js"></script>
+  <script src="js/property_grid.js"></script>
+  <script src="js/web3.js"></script>
+
   <!-- Template Main Javascript File -->
   <script src="js/main.js"></script>
 
