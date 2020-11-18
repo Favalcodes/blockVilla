@@ -351,6 +351,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                       <div class="validation"></div>
                     </div>
                   </div> -->
+                  <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                      <input name="address" type="text" class="form-control form-control-lg form-control-a" placeholder="Wallet Address" id="walletaddress" disabled>
+                      <div class="validation"></div>
+                    </div>
+                  </div>
                 <div class="col-md-12 mb-3">
                   <div class="form-group <?php echo (!empty($full_name_err)) ? 'has-error' : ''; ?>">
                     <label>Full Name</label>
@@ -365,6 +371,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             <span class="help-block"><?php echo $email_err; ?></span>
                         </div>
                 </div>
+                  <div class="col-md-12 mb-3">
+                    <div class="form-group">
+                      <input name="workaddress" id="workaddress" type="text" class="form-control form-control-lg form-control-a" placeholder="Your Work Address" data-rule="email" data-msg="Work Address">
+                      <div class="validation"></div>
+                    </div>
+                  </div>
                 <div class="col-md-12 mb-3">
                 <div class="form-group <?php echo (!empty($password_err)) ? 'has-error' : ''; ?>">
                             <label>Password</label>

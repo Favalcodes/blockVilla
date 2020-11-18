@@ -2,6 +2,7 @@
 // Include config file
 require_once "config.php";
 
+
 // Initialize the session
 session_start();
 
@@ -11,9 +12,325 @@ if (!isset($_SESSION["loggedin"]) || $_SESSION["loggedin"] !== true) {
   exit;
 }
 
+// Define variables and initialize with empty values
+$type = $location = $amount = $bath = $room = $p_desc = $whatsapp = $tel = $twitter = "";
+$location_err = $type_err = $amount_err = $bath_err = $room_err = $p_desc_err = $whatsapp_err = $tel_err = $twitter_err = "";
+
+// Processing form data when form is submitted
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+  // $image1 = $_FILES['image1']['name'];
+  // $image2 = $_FILES['image2']['name'];
+  // $image3 = $_FILES['image3']['name'];
+
+  // $c_of_o = $_FILES['c_of_o']['name'];
+  // $r_of_o = $_FILES['r_of_o']['name'];
+  // $survey_plan = $_FILES['survey_plan']['name'];
+
+  // $target = "uploads/".basename($image1);
+
+  // Validate type
+  if (empty(trim($_POST["type"]))) {
+    $type_err = "Please enter your type.";
+  } else {
+    // Prepare a select statement
+    $sql = "SELECT * FROM property WHERE type = ?";
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "s", $param_type);
+
+      // Set parameters
+      $param_type = trim($_POST["type"]);
+
+      // Attempt to execute the prepared statement
+      if (mysqli_stmt_execute($stmt)) {
+        /* store result */
+        mysqli_stmt_store_result($stmt);
+        $type = trim($_POST["type"]);
+      } else {
+        echo "Oops! Something went wrong. Please try again later.";
+      }
+
+      // Close statement
+      mysqli_stmt_close($stmt);
+    }
+  }
+
+  // Validate type
+  if (empty(trim($_POST["location"]))) {
+    $location_err = "Please enter your service location.";
+  } else {
+    // Prepare a select statement
+    $elect = "SELECT * FROM property WHERE location = ?";
+
+    if ($stmt = mysqli_prepare($link, $elect)) {
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "s", $param_location);
+
+      // Set parameters
+      $param_location = trim($_POST["location"]);
+
+      // Attempt to execute the prepared statement
+      if (mysqli_stmt_execute($stmt)) {
+        /* store result */
+        mysqli_stmt_store_result($stmt);
+        $location = trim($_POST["location"]);
+      } else {
+        echo "Oops! Something went wrong. Please try again later.";
+      }
+
+      // Close statement
+      mysqli_stmt_close($stmt);
+    }
+  }
+
+  // Validate billers code
+  if (empty(trim($_POST["bath"]))) {
+    $bath_err = "Please enter your Number of Bath.";
+  } else {
+    // Prepare a select statement
+    $sql = "SELECT * FROM property WHERE bath = ?";
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "s", $param_bath);
+
+      // Set parameters
+      $param_bath = trim($_POST["bath"]);
+
+      // Attempt to execute the prepared statement
+      if (mysqli_stmt_execute($stmt)) {
+        /* store result */
+        mysqli_stmt_store_result($stmt);
+        $bath = trim($_POST["bath"]);
+      } else {
+        echo "Oops! Something went wrong. Please try again later.";
+      }
+
+      // Close statement
+      mysqli_stmt_close($stmt);
+    }
+  }
+
+  // Validate amount
+  if (empty(trim($_POST["amount"]))) {
+    $amount_err = "Please enter an amount.";
+  } else {
+    // Prepare a select statement
+    $sql = "SELECT id FROM property WHERE amount = ?";
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "s", $param_amount);
+
+      // Set parameters
+      $param_amount = trim($_POST["amount"]);
+
+      // Attempt to execute the prepared statement
+      if (mysqli_stmt_execute($stmt)) {
+        /* store result */
+        mysqli_stmt_store_result($stmt);
+        $amount = trim($_POST["amount"]);
+      } else {
+        echo "Oops! Something went wrong. Please try again later.";
+      }
+
+      // Close statement
+      mysqli_stmt_close($stmt);
+    }
+  }
+
+  // Validate Phone number
+  if (empty(trim($_POST["tel"]))) {
+    $tel_err = "Please enter your Phone number.";
+  } else {
+    // Prepare a select statement
+    $sql = "SELECT * FROM property WHERE tel = ?";
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "s", $param_tel);
+
+      // Set parameters
+      $param_tel = trim($_POST["tel"]);
+
+      // Attempt to execute the prepared statement
+      if (mysqli_stmt_execute($stmt)) {
+        /* store result */
+        mysqli_stmt_store_result($stmt);
+        $tel = trim($_POST["tel"]);
+      } else {
+        echo "Oops! Something went wrong. Please try again later.";
+      }
+
+      // Close statement
+      mysqli_stmt_close($stmt);
+    }
+  }
+
+  // Validate Rooms
+  if (empty(trim($_POST["room"]))) {
+    $room_err = "Please enter Number of Rooms.";
+  } else {
+    // Prepare a select statement
+    $sql = "SELECT * FROM property WHERE room = ?";
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "s", $param_room);
+
+      // Set parameters
+      $param_room = trim($_POST["room"]);
+
+      // Attempt to execute the prepared statement
+      if (mysqli_stmt_execute($stmt)) {
+        /* store result */
+        mysqli_stmt_store_result($stmt);
+        $room = trim($_POST["room"]);
+      } else {
+        echo "Oops! Something went wrong. Please try again later.";
+      }
+
+      // Close statement
+      mysqli_stmt_close($stmt);
+    }
+  }
+
+  // Validate Property description
+  if (empty(trim($_POST["p_desc"]))) {
+    $p_desc_err = "Please enter Property description.";
+  } else {
+    // Prepare a select statement
+    $sql = "SELECT * FROM property WHERE p_desc = ?";
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "s", $param_p_desc);
+
+      // Set parameters
+      $param_p_desc = trim($_POST["p_desc"]);
+
+      // Attempt to execute the prepared statement
+      if (mysqli_stmt_execute($stmt)) {
+        /* store result */
+        mysqli_stmt_store_result($stmt);
+        $p_desc = trim($_POST["p_desc"]);
+      } else {
+        echo "Oops! Something went wrong. Please try again later.";
+      }
+
+      // Close statement
+      mysqli_stmt_close($stmt);
+    }
+  }
+
+  if ($_FILES['image1']['name']) {
+    move_uploaded_file($_FILES['image1']['tmp_name'], "uploads/" . $_FILES['image1']['name']);
+    $img1 = "uploads/" . $_FILES['image1']['name'];
+  }
+  if ($_FILES['image2']['name']) {
+    move_uploaded_file($_FILES['image2']['tmp_name'], "uploads/" . $_FILES['image2']['name']);
+    $img2 = "uploads/" . $_FILES['image2']['name'];
+  }
+  if ($_FILES['image3']['name']) {
+    move_uploaded_file($_FILES['image3']['tmp_name'], "uploads/" . $_FILES['image3']['name']);
+    $img3 = "uploads/" . $_FILES['image3']['name'];
+  }
+  if ($_FILES['c_of_o']['name']) {
+    move_uploaded_file($_FILES['c_of_o']['tmp_name'], "uploads/" . $_FILES['c_of_o']['name']);
+    $c_of_o = "uploads/" . $_FILES['c_of_o']['name'];
+  }
+  if ($_FILES['r_of_o']['name']) {
+    move_uploaded_file($_FILES['r_of_o']['tmp_name'], "uploads/" . $_FILES['r_of_o']['name']);
+    $r_of_o = "uploads/" . $_FILES['r_of_o']['name'];
+  }
+  if ($_FILES['survey_plan']['name']) {
+    move_uploaded_file($_FILES['survey_plan']['tmp_name'], "uploads/" . $_FILES['survey_plan']['name']);
+    $survey_plan = "uploads/" . $_FILES['survey_plan']['name'];
+  }
+
+  // Check input errors before inserting in database
+  if (empty($location_err) && empty($type_err) && empty($bath_err) && empty($room_err) && empty($amount_err) && empty($p_desc_err) && empty($tel_err)) {
+
+    // Prepare an insert statement
+    $sql = "INSERT INTO property (location, type, bath, room, amount, p_desc, tel) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+
+    if ($stmt = mysqli_prepare($link, $sql)) {
+
+      // Bind variables to the prepared statement as parameters
+      mysqli_stmt_bind_param($stmt, "sssssss", $param_location, $param_type, $param_bath, $param_room, $param_amount, $param_p_desc, $param_tel);
+
+      // Set parameters
+      $param_location = $location;
+      $param_type = $type;
+      $param_bath = $bath;
+      $param_room = $room;
+      $param_amount = $amount;
+      $param_p_desc = $p_desc;
+      $param_tel = $tel;
+      $param_image1 = $img1;
+      $param_image2 = $img2;
+      $param_image3 = $img3;
+      $param_c = $c_of_o;
+      $param_r = $r_of_o;
+      $param_survey = $survey_plan;
+
+
+      
+
+  if (mysqli_stmt_execute($stmt)) {
+
+    $sel = "SELECT * FROM property";
+    // if(isset($_GET['submit'])){
+    //   $id = $_GET['submit'];
+
+      $img_sql = "UPDATE property SET image1='$img1', image2='$img2', image3='$img3', c_of_o='$c_of_o', r_of_o='$r_of_o', survey_plan='$survey_plan' where id = id";
+
+      if(mysqli_multi_query($link, $img_sql)){
+
+        // Redirect to login page
+        header("location: index.php");
+      }
+      } else {
+        echo "Something went wrong. Please try again later.";
+      }
+    // }
+   
+                
+
+
+  
+
+      // Attempt to execute the prepared statement
+      // if (mysqli_stmt_execute($stmt)) {
+
+
+      //   // Redirect to dashboard page
+      //   // header("location: index.php");
+      // } else {
+      //   echo "Something went wrong. Please try again later.";
+      // }
+
+
+      // Close statement
+      mysqli_stmt_close($stmt);
+    }
+
+  }
+
+
+
+  // include "fileupload.php";
+}
+
 // SQL query to select data from database 
-$sql = "SELECT * FROM users";
-$result = $link->query($sql) or die("Error: " . mysqli_error($link));
+$sq = "SELECT * FROM users";
+$result = $link->query($sq) or die("Error: " . mysqli_error($link));
+
+// Close connection
+mysqli_close($link);
 
 ?>
 <!DOCTYPE html>
@@ -52,7 +369,7 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
   <div class="click-closed"></div>
 
   <!--/ Nav Star /-->
-  <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
+  <!-- <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
     <div class="container">
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarDefault" aria-controls="navbarDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span></span>
@@ -95,7 +412,7 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
         <?php } ?>
       </ul>
     </div>
-  </nav>
+  </nav> -->
   <!--/ Nav End /-->
 
   <!--/ Intro Single star /-->
@@ -134,7 +451,7 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
             <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
             <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Stat</a>
             <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Sell</a>
-            <a class="nav-link" href="login.html">Logout</a>
+            <a class="nav-link" href="logout.php">Logout</a>
           </div>
         </div>
         <div class="col-9">
@@ -175,7 +492,7 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
             </div>
             <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
               <div class="form-container">
-                <form action="" method="POST" role="form" enctype="multipart/form-data">
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="POST" role="form" enctype="multipart/form-data">
                   <input id='step2' type='checkbox'>
                   <input id='step3' type='checkbox'>
 
@@ -185,12 +502,12 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
                         <h3 class="panel-title">Sell/Rent</h3>
                       </div>
                       <label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">Type</label>
-                      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                        <option selected>Select</option>
-                        <option value="1">Sell</option>
-                        <option value="2">Rent</option>
+                      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="type" required>
+                        <option selected>Type</option>
+                        <option value="sell">Sell</option>
+                        <option value="rent">Rent</option>
                       </select>
-                      <input type="text" id="location" class="form-control" placeholder="Location" aria-describedby="sizing-addon1">
+                      <input type="text" id="location" class="form-control" placeholder="Location" aria-describedby="sizing-addon1" name="location" required>
                       <div class="btn-group btn-group-lg" role="group" aria-label="...">
                         <label for='step2' id="continue-step2" class="continue">
                           <div class="btn btn-default btn-success btn-lg">Continue</div>
@@ -204,14 +521,11 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
                       <div class="panel-heading">
                         <h3 class="panel-title">Step 2</h3>
                       </div>
-                      <div class="custom-file">
-                        <input type="file" name="fileUpload[]" class="custom-file-input" id="chooseFile" multiple>
-                        <label class="custom-file-label" for="chooseFile">Select images (min of 3 images)</label>
-                      </div>
-                      <div class="imgGallery">
-                        <!-- image preview -->
-                      </div>
-                      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                      <label for="images">Upload Property Images</label>
+                      <input type="file" name="image1" class="form-control" required>
+                      <input type="file" name="image2" class="form-control" required>
+                      <input type="file" name="image3" class="form-control" required><br>
+                      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="bath" required>
                         <option selected>Number of Bath</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -224,7 +538,7 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
                         <option value="9">9</option>
                         <option value="10">10</option>
                       </select>
-                      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect" name="room" required>
                         <option selected>Number of Room(s)</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -255,25 +569,25 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
                       <div class="panel-heading">
                         <h3 class="panel-title">Step 3</h3>
                       </div>
-                      <div class="custom-file">
-                        <input type="file" name="docUpload[]" class="custom-file-input" id="chooseDoc" multiple>
-                        <label class="custom-file-label" for="chooseFile">Select Document(Proof of Owner)</label>
-                      </div>
-                      <div class="docGallery">
-                        <!-- image preview -->
-                      </div>
-                      <input type="text" id="amount" class="form-control" placeholder="Amount" aria-describedby="sizing-addon1">
-                      <textarea id="message" class="form-control" placeholder="Full Description"></textarea>
+                      <label for="Doc">Proof of Ownership</label><br>
+                      <label for="Doc">Certificate of Occupancy</label>
+                      <input type="file" name="c_of_o" class="form-control" required>
+                      <label for="Doc">Right of Occupancy</label>
+                      <input type="file" name="r_of_o" class="form-control" required>
+                      <label for="Doc">Survey Plan</label>
+                      <input type="file" name="survey_plan" class="form-control" required>
+                      <input type="text" id="amount" class="form-control" placeholder="Amount in Eth" aria-describedby="sizing-addon1" name="amount" required>
+                      <textarea id="message" name="p_desc" class="form-control" placeholder="Full Description" required></textarea>
                       <label for="exampleFormControlFile1">Contact Details <span>(contact available to buyers/clients)</span></label>
                       <input type="text" id="whatsapp" class="form-control" placeholder="WhatsApp" name="whatsapp" aria-describedby="sizing-addon1">
-                      <input type="text" id="call" class="form-control" placeholder="Call Number" name="call" aria-describedby="sizing-addon1" required>
+                      <input type="text" id="call" class="form-control" placeholder="Call Number" name="tel" aria-describedby="sizing-addon1" required>
                       <input type="text" id="twitter" class="form-control" placeholder="Twitter" name="twitter" aria-describedby="sizing-addon1">
                       <div class="btn-group btn-group-lg" role="group" aria-label="...">
                         <label for='step3' id="back-step3" class="back">
                           <div class="btn btn-default btn-lg">Back</div>
                         </label>
                         <label class="continue">
-                          <button type="submit" class="btn btn-default btn-success btn-lg">Submit</button>
+                          <button type="submit" name="submit" class="btn btn-default btn-success btn-lg">Submit</button>
                         </label>
                       </div>
                     </div>
@@ -454,7 +768,7 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
   <script src="lib/jquery/jquery.min.js"></script>
   <script src="lib/jquery/jquery-migrate.min.js"></script>
 
-<script>
+  <!-- <script>
   $(function () {
     // Multiple images preview with JavaScript
     var multiImgPreview = function (input, imgPreviewPlaceholder) {
@@ -482,7 +796,7 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
       multiImgPreview(this, 'div.docGallery');
     });
   });
-</script>
+</script> -->
 
   <script src="lib/popper/popper.min.js"></script>
   <script src="lib/bootstrap/js/bootstrap.min.js"></script>
