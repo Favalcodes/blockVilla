@@ -23,40 +23,46 @@ contract RegisterUsers {
         string work_address;
         string extra_detail;
         bytes32 password;
-        uint256 photo;
         address wallet;
-        bool status;
     }
 
     Profile[] private users;
     mapping (uint => address) profileToUser;
     mapping (address => uint) userToProfile;
+    mapping (address => bool) alreadyRegistered;
 
     event newUser(uint id, string name, string work_address, string extra_detail);
+    event userDetail(string name, string work_address, string extra_detail);
+    modifier checkRegistered(address _check) {
+        require(alreadyRegistered[_check] == false, "You already have an account");
+        _;
+    }
 
-    function addUser(string calldata _name, string calldata _work_address, string calldata _extra_detail,string calldata _passsword,uint256 _photo)  external {
-
+    function addUser(string calldata _name, string calldata _work_address, string calldata _extra_detail,string calldata _passsword)  external checkRegistered(msg.sender) {
+        
         bytes32 safepassword = keccak256(abi.encodePacked(_passsword));
-        users.push(Profile(_name,_work_address, _extra_detail,safepassword, _photo,msg.sender,false ));
-        uint id = users.length - 1;
+        users.push(Profile(_name,_work_address, _extra_detail,safepassword,msg.sender));
+        uint id = uint32(users.length - 1);
         profileToUser[id] = msg.sender;
         userToProfile[msg.sender] = id;
+        alreadyRegistered[msg.sender] = true;
         emit newUser(id,_name,_work_address,_extra_detail);
     }
     
-    function _approveUser(uint _userId) external onlyOwner {
-        users[_userId].status = true;
+    // function approveUser(uint _userId) external onlyOwner {
+    //     users[_userId].status = true;
+    // }
+
+    function viewUserProfile(uint _userId) public view returns(string memory, string memory,string memory)  {
+        // require(msg.sender == users[_userId].wallet);
+        string memory _name = users[_userId].name;
+        string  memory _workaddress = users[_userId].work_address;
+        string memory _extras = users[_userId].extra_detail;
+        // users[_userId].photo;
+        return(_name,_workaddress,_extras);
     }
 
-    function _viewUserProfile(uint _userId) public view  {
-        require(msg.sender == users[_userId].wallet);
-        users[_userId].name;
-        users[_userId].work_address;
-        users[_userId].extra_detail;
-        users[_userId].photo;
-    }
-
-    function _userLogin(string calldata _password) external view returns(bool, string memory) {
+    function userLogin(string calldata _password) external view returns(bool, string memory) {
         
         require(users[userToProfile[msg.sender]].password == keccak256(abi.encodePacked(_password)), "Wrong password"); 
         return (true, "User logged in succefully");

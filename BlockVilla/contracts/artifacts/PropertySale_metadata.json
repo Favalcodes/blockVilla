@@ -35,6 +35,12 @@
 				"inputs": [
 					{
 						"indexed": false,
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					},
+					{
+						"indexed": false,
 						"internalType": "string",
 						"name": "name",
 						"type": "string"
@@ -47,14 +53,14 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "string",
-						"name": "extraDetails",
-						"type": "string"
+						"internalType": "uint32",
+						"name": "rooms",
+						"type": "uint32"
 					},
 					{
 						"indexed": false,
 						"internalType": "uint32",
-						"name": "landOrHouse",
+						"name": "bathrooms",
 						"type": "uint32"
 					},
 					{
@@ -105,6 +111,31 @@
 				"type": "event"
 			},
 			{
+				"anonymous": false,
+				"inputs": [
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "name",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "work_address",
+						"type": "string"
+					},
+					{
+						"indexed": false,
+						"internalType": "string",
+						"name": "extra_detail",
+						"type": "string"
+					}
+				],
+				"name": "userDetail",
+				"type": "event"
+			},
+			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -117,13 +148,13 @@
 						"type": "string"
 					},
 					{
-						"internalType": "string",
-						"name": "_extraDetails",
-						"type": "string"
+						"internalType": "uint32",
+						"name": "_rooms",
+						"type": "uint32"
 					},
 					{
 						"internalType": "uint32",
-						"name": "_landOrHouse",
+						"name": "_bathrooms",
 						"type": "uint32"
 					},
 					{
@@ -140,110 +171,11 @@
 						"internalType": "uint256",
 						"name": "_propertyDeed",
 						"type": "uint256"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_userId",
-						"type": "uint256"
 					}
 				],
-				"name": "_addProperty",
+				"name": "addProperty",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_propertyId",
-						"type": "uint256"
-					}
-				],
-				"name": "_approveProperty",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_userId",
-						"type": "uint256"
-					}
-				],
-				"name": "_approveUser",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "propertyId",
-						"type": "uint256"
-					}
-				],
-				"name": "_buyProperty",
-				"outputs": [
-					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "payable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_password",
-						"type": "string"
-					}
-				],
-				"name": "_userLogin",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "_viewProperties",
-				"outputs": [],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_userId",
-						"type": "uint256"
-					}
-				],
-				"name": "_viewUserProfile",
-				"outputs": [],
-				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -267,16 +199,59 @@
 						"internalType": "string",
 						"name": "_passsword",
 						"type": "string"
-					},
-					{
-						"internalType": "uint256",
-						"name": "_photo",
-						"type": "uint256"
 					}
 				],
 				"name": "addUser",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_propertyId",
+						"type": "uint256"
+					}
+				],
+				"name": "approveProperty",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "propertyId",
+						"type": "uint256"
+					}
+				],
+				"name": "buyProperty",
+				"outputs": [
+					{
+						"internalType": "address",
+						"name": "",
+						"type": "address"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "payable",
 				"type": "function"
 			},
 			{
@@ -290,16 +265,121 @@
 						"internalType": "uint256",
 						"name": "amount",
 						"type": "uint256"
-					},
-					{
-						"internalType": "address",
-						"name": "_newOwner",
-						"type": "address"
 					}
 				],
 				"name": "effectTransfer",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "numberOfProperties",
+				"outputs": [
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_password",
+						"type": "string"
+					}
+				],
+				"name": "userLogin",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_id",
+						"type": "uint256"
+					}
+				],
+				"name": "viewProperty",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint32",
+						"name": "",
+						"type": "uint32"
+					},
+					{
+						"internalType": "uint256",
+						"name": "",
+						"type": "uint256"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_userId",
+						"type": "uint256"
+					}
+				],
+				"name": "viewUserProfile",
+				"outputs": [
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -316,7 +396,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/sellProperty.sol": "PropertySale"
+			"localhost/BlockVilla/contracts/PropertySale.sol": "PropertySale"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -330,44 +410,28 @@
 		"remappings": []
 	},
 	"sources": {
-		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/GSN/Context.sol": {
-			"keccak256": "0xdb26cbf4d028490f49831a7865c2fe1b28db44b535ca8d343785a3b768aae183",
+		"localhost/BlockVilla/contracts/PropertyRegister.sol": {
+			"keccak256": "0x2c44fd631f32a801bb5c51e0c246fec930350a5a2c86e28d761ac75d6b276ad1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://840b14ce0315c47d49ba328f1f9fa7654ded1c9e1559e6c5e777a7b2dc28bf0a",
-				"dweb:/ipfs/QmTLLabn4wcfGro9LEmUXUN2nwKqZSotXMvjDCLXEnLtZP"
+				"bzz-raw://807c5a4b04565e6e50545bf87ba9e75e787e52939db2ce856e9685df40037ee4",
+				"dweb:/ipfs/QmePBYZf2zUwMi9FshHt6xeARQwWqe5wSeUJES7CHsxL69"
 			]
 		},
-		"github.com/OpenZeppelin/openzeppelin-contracts/blob/master/contracts/access/Ownable.sol": {
-			"keccak256": "0x4bd6402ca6b3419008c2b482aff54e66836e8cb4eba2680e42ac5884ae6424fc",
+		"localhost/BlockVilla/contracts/PropertySale.sol": {
+			"keccak256": "0xf9b942b1c16e0bfed7cbdd479661f093ff7a90d86e09ef023518ddf343058cbf",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://8f9f711fb8d0d92aeea1c327e3845d13ca1fa8f142e47f8723cd5b3106fb29a3",
-				"dweb:/ipfs/QmVQUReDW9f4zGqhizwHnyU8EntMs95tbASdqkGncnikba"
+				"bzz-raw://0ab27d229cabaadd52291b47da00146e87d44502a62adca57465aec21ef3d311",
+				"dweb:/ipfs/QmSiciE7m2EX9KQgHzCR6rSkcQvLxM5Yvr34ZrXUCEMo5c"
 			]
 		},
-		"localhost/registerProperty.sol": {
-			"keccak256": "0xf6b811571c66d349a66b2cd04b6eaa534cd6e2e3b2b4d157932234013d10958f",
+		"localhost/BlockVilla/contracts/RegisterUsers.sol": {
+			"keccak256": "0x6145184ce6771fce6b5a92847f67473617119e3bca6d2c17ef19876342aaeff1",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://42b8f8c1436f876f6fb06576df8c49ef3238ccbd5b89fcafe6da038fdfe7dad7",
-				"dweb:/ipfs/Qme52KQEpQ6npP9NAkzveW7FhrgkFyjUbZqnfJjeijSUmQ"
-			]
-		},
-		"localhost/sellProperty.sol": {
-			"keccak256": "0x796432ff0cd3eb910c01c78d854752f86c84186e5510d3543eb5977ab7bb7d8e",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://76af6e6c0be2f6f839d58d2c44232bf8bd6d757edaae1bc82665bcf1c5e8fedd",
-				"dweb:/ipfs/QmbQDCSg2qCqACtQSPthEbbGdKPwZFFAvpyZmRgSgQ6gya"
-			]
-		},
-		"localhost/userRegistry.sol": {
-			"keccak256": "0xc5e7fedda70c13852097fe4be00d4f85fa747102149836b83ba7893d3c551741",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://dece8b992e4a98197e2d2585dc44ced659e57d2d6a5f5e522791bdc2aa848348",
-				"dweb:/ipfs/QmccDNSExXV1gRHezTbShwUa88Q4ztLTvEf7QAc8h8JCBK"
+				"bzz-raw://41e91689dc054a0b0a447472b1ec90efedbe3891eacf05d9b9b413f2eb7eecf0",
+				"dweb:/ipfs/QmcEhLN5sNjgBxJW6ruNRdw3cBe9Mb5YVW6vpejRVfEdZt"
 			]
 		}
 	},
