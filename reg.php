@@ -341,7 +341,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
       <div class="col-sm-12 section-t8">
         <div class="row">
           <div class="col-md-7">
-            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" role="form">
+          <button class="btn btn-a" id="connector">Connect Wallet</button>
+            <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post" role="form" id="userform" class="form-a">
               <!-- <div id="sendmessage">Registration Successful</div>
                 <div id="errormessage"></div> -->
               <div class="row">
