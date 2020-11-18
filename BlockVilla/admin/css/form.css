@@ -1,0 +1,84 @@
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #2eca6a;
+}
+.form-container {
+    width: 100%;
+    margin: 0 auto;
+    line-height: 50px;
+}
+.form-container input[type=text], input[type=email], input[type=phone], input[type=number], textarea {
+      width: 100%;
+      margin: 20px auto;
+      border: 1px solid #2eca6a;
+      box-shadow: 0  0 1px 1px #2eca6a;
+    }
+    textarea {
+      min-height: 150px;
+    }
+    /* .panel {
+      background: rgba(0,0,0,.2);
+      .panel-heading {
+        margin-bottom: 20px;
+      }
+    } */
+    .btn-group {
+      width: 90%;
+      margin: 0 auto 10px auto;
+    }
+    .back {
+      float: left;
+    }
+    .continue {
+      float: right;
+    }
+  
+  /* Multi-Part CSS */
+  input[type=checkbox] {
+    position: absolute;
+    /* Position the checkbox in upper left corner */
+    
+    opacity: 0;
+  }
+  
+  /* Styling Parts */
+  #part1,
+  #part2,
+  #part3 {
+    z-index: 2;
+    display: block;
+    height: auto;
+    opacity: 1;
+    transition: opacity 1s ease-in-out;
+  }
+  
+  /* Hidden Parts */
+  #part2,
+  #part3 {
+    opacity: 0;
+    height: auto;
+    overflow: hidden;
+  }
+  
+  /* Show Step 2 & Hide Step 1 */
+  #step2:checked ~ #part2 {
+    opacity: 1;
+    height: auto;
+  }
+  #step2:checked ~ #part1 {
+    opacity: 0;
+    height: 0;
+    display: none;
+  }
+  
+  /* Show Step 3  & Hide Step 2 */
+  #step3:checked ~ #part3 {
+    opacity: 1;
+    height: auto;
+  }
+  #step3:checked ~ #part2 {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
