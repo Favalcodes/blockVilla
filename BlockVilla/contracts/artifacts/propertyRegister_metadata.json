@@ -10,12 +10,6 @@
 				"inputs": [
 					{
 						"indexed": false,
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					},
-					{
-						"indexed": false,
 						"internalType": "string",
 						"name": "name",
 						"type": "string"
@@ -28,14 +22,14 @@
 					},
 					{
 						"indexed": false,
-						"internalType": "uint32",
-						"name": "rooms",
-						"type": "uint32"
+						"internalType": "string",
+						"name": "extraDetails",
+						"type": "string"
 					},
 					{
 						"indexed": false,
 						"internalType": "uint32",
-						"name": "bathrooms",
+						"name": "landOrHouse",
 						"type": "uint32"
 					},
 					{
@@ -86,31 +80,6 @@
 				"type": "event"
 			},
 			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "name",
-						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "work_address",
-						"type": "string"
-					},
-					{
-						"indexed": false,
-						"internalType": "string",
-						"name": "extra_detail",
-						"type": "string"
-					}
-				],
-				"name": "userDetail",
-				"type": "event"
-			},
-			{
 				"inputs": [
 					{
 						"internalType": "string",
@@ -123,13 +92,13 @@
 						"type": "string"
 					},
 					{
-						"internalType": "uint32",
-						"name": "_rooms",
-						"type": "uint32"
+						"internalType": "string",
+						"name": "_extraDetails",
+						"type": "string"
 					},
 					{
 						"internalType": "uint32",
-						"name": "_bathrooms",
+						"name": "_landOrHouse",
 						"type": "uint32"
 					},
 					{
@@ -146,11 +115,86 @@
 						"internalType": "uint256",
 						"name": "_propertyDeed",
 						"type": "uint256"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_user_id",
+						"type": "uint256"
 					}
 				],
-				"name": "addProperty",
+				"name": "_addProperty",
 				"outputs": [],
 				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_propertyId",
+						"type": "uint256"
+					}
+				],
+				"name": "_approveProperty",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_userId",
+						"type": "uint256"
+					}
+				],
+				"name": "_approveUser",
+				"outputs": [],
+				"stateMutability": "nonpayable",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "string",
+						"name": "_password",
+						"type": "string"
+					}
+				],
+				"name": "_userLogin",
+				"outputs": [
+					{
+						"internalType": "bool",
+						"name": "",
+						"type": "bool"
+					},
+					{
+						"internalType": "string",
+						"name": "",
+						"type": "string"
+					}
+				],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [],
+				"name": "_viewProperties",
+				"outputs": [],
+				"stateMutability": "view",
+				"type": "function"
+			},
+			{
+				"inputs": [
+					{
+						"internalType": "uint256",
+						"name": "_userId",
+						"type": "uint256"
+					}
+				],
+				"name": "_viewUserProfile",
+				"outputs": [],
+				"stateMutability": "view",
 				"type": "function"
 			},
 			{
@@ -174,145 +218,16 @@
 						"internalType": "string",
 						"name": "_passsword",
 						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "_photo",
+						"type": "uint256"
 					}
 				],
 				"name": "addUser",
 				"outputs": [],
 				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_propertyId",
-						"type": "uint256"
-					}
-				],
-				"name": "approveProperty",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [],
-				"name": "numberOfProperties",
-				"outputs": [
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "string",
-						"name": "_password",
-						"type": "string"
-					}
-				],
-				"name": "userLogin",
-				"outputs": [
-					{
-						"internalType": "bool",
-						"name": "",
-						"type": "bool"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_id",
-						"type": "uint256"
-					}
-				],
-				"name": "viewProperty",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					},
-					{
-						"internalType": "uint32",
-						"name": "",
-						"type": "uint32"
-					},
-					{
-						"internalType": "uint32",
-						"name": "",
-						"type": "uint32"
-					},
-					{
-						"internalType": "uint32",
-						"name": "",
-						"type": "uint32"
-					},
-					{
-						"internalType": "uint256",
-						"name": "",
-						"type": "uint256"
-					}
-				],
-				"stateMutability": "view",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "uint256",
-						"name": "_userId",
-						"type": "uint256"
-					}
-				],
-				"name": "viewUserProfile",
-				"outputs": [
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					},
-					{
-						"internalType": "string",
-						"name": "",
-						"type": "string"
-					}
-				],
-				"stateMutability": "view",
 				"type": "function"
 			}
 		],
@@ -329,7 +244,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"localhost/BlockVilla/contracts/PropertyRegister.sol": "PropertyRegister"
+			"localhost/contracts/PropertyRegister.sol": "PropertyRegister"
 		},
 		"evmVersion": "istanbul",
 		"libraries": {},
@@ -343,20 +258,20 @@
 		"remappings": []
 	},
 	"sources": {
-		"localhost/BlockVilla/contracts/PropertyRegister.sol": {
-			"keccak256": "0x2c44fd631f32a801bb5c51e0c246fec930350a5a2c86e28d761ac75d6b276ad1",
+		"localhost/contracts/PropertyRegister.sol": {
+			"keccak256": "0x3a799abb01ecf1b0a15232006e8abb687a15b4b9a81f08e61eab3e5499c683bb",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://807c5a4b04565e6e50545bf87ba9e75e787e52939db2ce856e9685df40037ee4",
-				"dweb:/ipfs/QmePBYZf2zUwMi9FshHt6xeARQwWqe5wSeUJES7CHsxL69"
+				"bzz-raw://7795a5412ad0d982078067ccbc1b3c49c1bf07795c0cd9795fe10131eea8984e",
+				"dweb:/ipfs/QmTvVbudZUf567mdChWp7wQp3b63NMZcLVHpBZHDrfAZoL"
 			]
 		},
-		"localhost/BlockVilla/contracts/RegisterUsers.sol": {
-			"keccak256": "0x6145184ce6771fce6b5a92847f67473617119e3bca6d2c17ef19876342aaeff1",
+		"localhost/contracts/RegisterUsers.sol": {
+			"keccak256": "0x93ba31420e08fc290a02e545354cb35f3a82e0b28cff7a048bd7cd5aa3b868df",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://41e91689dc054a0b0a447472b1ec90efedbe3891eacf05d9b9b413f2eb7eecf0",
-				"dweb:/ipfs/QmcEhLN5sNjgBxJW6ruNRdw3cBe9Mb5YVW6vpejRVfEdZt"
+				"bzz-raw://bc2886b9e2c8696da8f52cbdf2e6514c3afcc758ab59de22006e14af2779dfcb",
+				"dweb:/ipfs/QmStXP1iKmzv2K6x8RJ4eKquqZfBzmuDRSXae9tqBJaMwV"
 			]
 		}
 	},

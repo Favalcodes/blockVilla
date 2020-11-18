@@ -48,7 +48,6 @@ $result = $link->query($sql) or die("Error: " . mysqli_error($link));
 
 <body>
 
-  <div class="click-closed"></div>
 
   <!--/ Nav Star /-->
   <nav class="navbar navbar-default navbar-trans navbar-expand-lg fixed-top">
