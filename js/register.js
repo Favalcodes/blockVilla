@@ -399,8 +399,9 @@ document.getElementById("userform").addEventListener("submit", async function(e)
     const account = localStorage.getItem("address")
     let user = await propertySale.methods.addUser(name, workAddress, "Realtor", password, 1234).send({ from: account})
     if(user){
+      e.submit()
       const data = user.events.newUser.returnedValues
-      window.location.replace("http://127.0.0.1:5500/blockVilla/BlockVilla/index.html#");
+      window.location.replace("../index.php");
     }
     console.log(user)
   })
