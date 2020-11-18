@@ -379,7 +379,7 @@ const propertySaleAbi = [
   }
 
   ];
-const propertySaleAddress = "0xdfdbba269a7961307d8342eba7a558d3ff8a551c";
+const propertySaleAddress = "0x777f04047d155ee58c2c98461943428f3d82d010";
 
 document.getElementById("userform").addEventListener("submit", async function(e){
     e.preventDefault();

@@ -377,7 +377,7 @@ const propertySaleAbi = [
     "type": "function"
   }
  ];
-const propertySaleAddress = "0x8c89ef8e62bd75b8eec6435e3528585f18dae845";
+const propertySaleAddress = "0x777f04047d155ee58c2c98461943428f3d82d010";
 const web3 = new Web3(window.ethereum)
   
 const propertySale = new web3.eth.Contract(
